@@ -1,0 +1,37 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    volumes:
+        - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - website1
+      - website2
+      - website3
+    ports:
+      - 8888:80
+  website1:
+    build: ./
+    container_name: website1
+    environment:
+      PORT: 2008
+    ports:
+      - 2008:2008
+
+  website2:
+    build: ./
+    container_name: website2
+    environment:
+      - PORT=3008
+    ports:
+      - 3008:3008
+
+  website3:
+    build: ./
+    container_name: website3
+    environment:
+      - PORT=5008
+    ports:
+      - 5008:5008
+   
+
